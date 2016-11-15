@@ -72,7 +72,7 @@ $scope.solsPerDiff = 8192;
                         return;
                     }
                     //compute the conversion rate from different btc prices to get foreign currency price of coin
-                    $http.get("http://coinmarketcap-nexuist.rhcloud.com/api/btc")
+                    $http.get("https://coinmarketcap-nexuist.rhcloud.com/api/btc")
                     .success(function(response) {
                         if ($scope.currency == "CNY") {
                             var conversionRate = response.price.usd/response.price.cny;
@@ -132,7 +132,7 @@ $scope.solsPerDiff = 8192;
                     return;
                 }
                 //compute the conversion rate from different btc prices to get foreign currency price of coin
-                $http.get("http://coinmarketcap-nexuist.rhcloud.com/api/btc")
+                $http.get("https://coinmarketcap-nexuist.rhcloud.com/api/btc")
                 .success(function(response) {
                     if ($scope.currency == "CNY") {
                         var conversionRate = response.price.usd/response.price.cny;
