@@ -1,0 +1,152 @@
+body {
+  background-color: white;
+}
+h2,
+h1,
+h3 {
+    text-align: center;
+}
+input {
+    width: 50%;
+}
+table {
+    border-collapse: collapse;
+    border: 1px white solid;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+th {
+    background: #ccc;
+    text-align: right;
+    border: 1px white solid;
+}
+table {
+    margin: 10px;
+}
+#inputTable th {
+    width: 30%;
+}
+#outputTable td {
+    background-color: #eee;
+}
+#mobileAdBanner {
+    display: none;
+}
+#smallTitle {
+    display: none;
+}
+#desktopAdBanner {
+    margin-top: 10px;
+    display: block;
+    text-align: center;
+    
+}
+
+@media screen 
+and (max-width : 500px) {
+    #mobileAdBanner,
+    #smallTitle {
+    margin-top: 10px;
+        display: block;
+        text-align: center;
+    }
+    #desktopAdBanner,
+    #bigTitle {
+        display: none;
+    }
+}
+td {
+    border: 2px white solid;
+}
+.negative {
+    color: red;
+}
+#chartContainer {
+    text-align: center;
+    height: 550px;
+    padding: 7px;
+    background-color: #cccccc;
+}
+#header {
+  margin-bottom: 5px;
+}
+#authorInfo {
+    text-align: center;
+    padding: 10px;
+    
+}
+#axisChange {
+    width: 50px;
+}
+#infoMessage {
+    text-align: center;
+    color: #430056;
+    margin-bottom: 5px;
+}
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  left: 3px;
+  top: 5px;
+  display: inline-block;
+  width: 39px;
+  height: 23px;
+}
+#autoUpdateString {
+  position: relative;
+  left: 50px;
+  top: -5px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 17px;
+  width: 17px;
+  left: 2px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(18px);
+  -ms-transform: translateX(18px);
+  transform: translateX(18px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 25px;
+  margin: auto;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}

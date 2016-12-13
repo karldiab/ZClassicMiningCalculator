@@ -1,2 +1,2 @@
-# ZClassicMiningCalculator
-Fork of my other mining calculators, for ZClassic
+# ZCashMiningCalculator
+Fork of my Ethereum Mining Calculator
