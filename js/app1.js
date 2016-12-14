@@ -15,7 +15,6 @@ app.factory('socket', ['$rootScope', function($rootScope) {
 }]);
 
 app.controller("data", function data($scope, $http, socket) {
-    $scope.diffChangeWarningThreshold = 0.075;
     $scope.dynamicDifficulty = true;
     $scope.dynamicDifficultyString = "On";
     $scope.autoUpdate = true;
@@ -69,7 +68,7 @@ app.controller("data", function data($scope, $http, socket) {
         
         $scope.updateStats = function(data) {
             $scope.priceUSD = data.priceUSD;
-            $scope.calculatePrice();
+            $scope.calculatePrice(false);
             $scope.difficulty = data.difficulty;
             $scope.difficulty = parseFloat(($scope.difficulty).toFixed(0));
             $scope.diffChange = data.diffChange;
@@ -85,10 +84,10 @@ app.controller("data", function data($scope, $http, socket) {
                 for (var currency in response.price) {
                     $scope.currencyRates[currency] = response.price[currency]/response.price.usd;
                 }
-                $scope.calculatePrice();
+                $scope.calculatePrice(true);
             })
         }
-        $scope.calculatePrice = function() {
+        $scope.calculatePrice = function(computeProfitsAfter) {
             if ($scope.currency == "USD") {
                 $scope.price = $scope.priceUSD;
                 $scope.price = parseFloat(parseFloat($scope.price).toFixed(2));
@@ -98,6 +97,9 @@ app.controller("data", function data($scope, $http, socket) {
             } else {
                 $scope.price = $scope.priceUSD *  $scope.currencyRates[$scope.currency.toLowerCase()];
                 $scope.price = parseFloat(parseFloat($scope.price).toFixed(2));
+                if (computeProfitsAfter) {
+                    $scope.computeProfits();
+                }
             }
         }
     /*Function that calculates the profits of the user in ethereum.*/
@@ -155,7 +157,7 @@ app.controller("data", function data($scope, $http, socket) {
                 $scope.profit[i] =  parseFloat($scope.profit[i].toFixed(2));
                 if ($scope.dynamicDifficulty) {
                     if ($scope.diffChange > 0) {
-                        if ($scope.diffChange/$scope.difficulty > $scope.diffChangeWarningThreshold) {
+                        if ($scope.diffChange/$scope.difficulty > 0.0625) {
                             projectedDifficulty += ($scope.diffChange*30.0/7.0);
                             //projectedDifficulty += (($scope.diffChange/$scope.difficulty)*$scope.diffChange*30.0/7.0);
                             $scope.dynamicDiffWarning = true;
@@ -163,7 +165,7 @@ app.controller("data", function data($scope, $http, socket) {
                             projectedDifficulty += ($scope.diffChange*30.0/7.0);
                             $scope.dynamicDiffWarning = false;
                         }
-                    } else if (-($scope.diffChange/$scope.difficulty) > $scope.diffChangeWarningThreshold) {
+                    } else if (-($scope.diffChange/$scope.difficulty) > 0.0625) {
                         //projectedDifficulty = $scope.difficulty;
                         projectedDifficulty *= 1 + ($scope.diffChange*30.0/7.0)/$scope.difficulty;
                         $scope.dynamicDiffWarning = true;
